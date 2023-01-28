@@ -6,16 +6,15 @@ const App = () => {
   console.log('load each time the components render')
 
   useEffect(() => {
-    const fetchData = () => {
-      fetch('https://www.roh.org.uk/api/event-details?slug=turandot-by-andrei-serban')
-      .then((response) => {
-        console.log(`here's what the fetch request returns:`, response)
-        return response.json()
-      })
-      .then((data) => {
-        console.log(`the jsonified response: `, data)
-        return setData(data)
-      })
+    const fetchData = async () => {
+      const response = await fetch('https://www.roh.org.uk/api/event-details?slug=turandot-by-andrei-serban')
+      console.log(`here's what the fetch request returns:`, response)
+
+      if (response.status === 200) {
+        const dataJson = await response.json()
+        console.log(`the jsonified response: `, dataJson)
+        setData(dataJson)
+      }
     }
 
     fetchData()
