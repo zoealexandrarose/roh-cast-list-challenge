@@ -10,19 +10,20 @@ const App = () => {
   const CreativesList = (data) => {
     const creativePeople = []
     data.included.forEach((relationship) => {
-      if (relationship === 'creatives') {
+      if (relationship.type === "creatives") {
         creativePeople.push({
           name: relationship.attributes.name,
           role: relationship.attributes.role,
         })
       }
     })
+    return creativePeople;
   }
 
   const CastList = (data) => {
-    const castPeople = [];
+    const castPeople = []
     data.included.forEach((relationship) => {
-      if (relationship === "castRoles") {
+      if (relationship.type === "castRoles") {
         castPeople.push({
           name: relationship.attributes.name,
           role: relationship.attributes.role,
@@ -30,7 +31,7 @@ const App = () => {
       }
     })
     return castPeople;
-  };
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +66,9 @@ const App = () => {
       <p>Date: 10/3/2023</p>
       <p>{data.shortDescription}</p>
       <h3>Creatives</h3>
+      <Creatives creatives={data.creatives} />
       <h3>Cast</h3>
+      <Cast cast={data.cast} />
     </div>
   )
 }
