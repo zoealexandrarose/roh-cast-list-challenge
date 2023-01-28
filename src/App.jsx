@@ -1,21 +1,36 @@
 import React, {useState, useEffect} from 'react'
-import './App.css';
+import Cast from './components/Cast'
+import Creatives from './components/Creatives'
+import './App.css'
 
 const App = () => {
   const [data, setData] = useState([])
   console.log('load each time the components render')
 
-  const CreativesList = () => {
+  const CreativesList = (data) => {
     const creativePeople = []
-
-    return creativePeople
+    data.included.forEach((relationship) => {
+      if (relationship === 'creatives') {
+        creativePeople.push({
+          name: relationship.attributes.name,
+          role: relationship.attributes.role,
+        })
+      }
+    })
   }
 
-  const CastList = () => {
-    const castPeople = []
-
-    return castPeople
-  }
+  const CastList = (data) => {
+    const castPeople = [];
+    data.included.forEach((relationship) => {
+      if (relationship === "castRoles") {
+        castPeople.push({
+          name: relationship.attributes.name,
+          role: relationship.attributes.role,
+        });
+      }
+    });
+    return castPeople;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,8 +44,10 @@ const App = () => {
 
           const apiDataObject = {
             title: titleAndDescription.attributes.title,
-            shortDescription: titleAndDescription.attributes.shortDescription.replace('<p>', '').replace('</p>','')
-          };
+            shortDescription: titleAndDescription.attributes.shortDescription.replace('<p>', '').replace('</p>',''),
+            creatives: CreativesList(dataJson),
+            cast: CastList(dataJson)
+          }
           setData(apiDataObject);
       } catch (errors) {
         console.log(errors)
