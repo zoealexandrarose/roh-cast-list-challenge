@@ -7,13 +7,14 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('https://www.roh.org.uk/api/event-details?slug=turandot-by-andrei-serban')
-      console.log(`here's what the fetch request returns:`, response)
-
-      if (response.status === 200) {
-        const dataJson = await response.json()
-        console.log(`the jsonified response: `, dataJson)
-        setData(dataJson)
+      try {
+        const response = await fetch('https://www.roh.org.uk/api/event-details?slug=turandot-by-andrei-serban')
+        console.log(`here's what the fetch request returns:`, response)
+          const dataJson = await response.json()
+          console.log(`the jsonified response: `, dataJson)
+          setData(dataJson)
+      } catch (errors) {
+        console.log(errors)
       }
     }
 
