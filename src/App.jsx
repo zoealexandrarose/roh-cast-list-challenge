@@ -5,6 +5,18 @@ const App = () => {
   const [data, setData] = useState([])
   console.log('load each time the components render')
 
+  const CreativesList = () => {
+    const creativePeople = []
+
+    return creativePeople
+  }
+
+  const CastList = () => {
+    const castPeople = []
+
+    return castPeople
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,6 +47,8 @@ const App = () => {
       <h1>{data.title}</h1>
       <p>Date: 10/3/2023</p>
       <p>{data.shortDescription}</p>
+      <h3>Creatives</h3>
+      <h3>Cast</h3>
     </div>
   )
 }
