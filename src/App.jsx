@@ -26,9 +26,9 @@ const App = () => {
         castPeople.push({
           name: relationship.attributes.name,
           role: relationship.attributes.role,
-        });
+        })
       }
-    });
+    })
     return castPeople;
   };
 
