@@ -1,4 +1,4 @@
-# Tech challenge
+# Tech Challenge - Cast List
 Build a tool for ROH
 
 - Started the challenge with accessing the API, did some refactoring and some error catching. I used state and effect hooks for this.
